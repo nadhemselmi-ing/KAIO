@@ -1,0 +1,34 @@
+{
+ "ablation": {
+  "Full E-LOTUS": {
+   "nominal": 85.27415271968206,
+   "energy_starved": 83.25030281960692,
+   "battery_starved": 80.14067641632957,
+   "degraded_radiator": 71.21848187935564
+  },
+  "Without entropy (land mask only)": {
+   "nominal": 87.05745847179284,
+   "energy_starved": 78.27143100930472,
+   "battery_starved": 66.33042658268599,
+   "degraded_radiator": 69.26033323876524
+  },
+  "Without land mask (raw entropy)": {
+   "nominal": 83.53840383288,
+   "energy_starved": 51.74434895035317,
+   "battery_starved": 41.72562327206739,
+   "degraded_radiator": 63.40358697918053
+  },
+  "Without laser offload": {
+   "nominal": 83.73685049520074,
+   "energy_starved": 81.62067314602882,
+   "battery_starved": 77.75562566140714,
+   "degraded_radiator": 66.98864640874936
+  },
+  "Without eclipse-aware battery floor": {
+   "nominal": 85.27415271968206,
+   "energy_starved": 82.89046501667708,
+   "battery_starved": 79.17579354795866,
+   "degraded_radiator": 71.21848187935564
+  }
+ }
+}

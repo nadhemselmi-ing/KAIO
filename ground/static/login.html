@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAIO · Sign in</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><rect x='18' y='8' width='9' height='64' rx='2' fill='%23121A2B'/><path d='M27 42 L58 10' stroke='%23121A2B' stroke-width='9' stroke-linecap='round'/><path d='M37 33 L62 70' stroke='%23121A2B' stroke-width='9' stroke-linecap='round'/><ellipse cx='40' cy='40' rx='36' ry='11' fill='none' stroke='%23E9A23B' stroke-width='3.2' transform='rotate(-20 40 40)'/><circle cx='74' cy='28' r='5' fill='%23E9A23B'/></svg>">
+<style>
+@font-face{font-family:'Space Grotesk';font-weight:400;src:url(/assets/fonts/space-grotesk-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Space Grotesk';font-weight:600;src:url(/assets/fonts/space-grotesk-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:normal;src:url(/assets/fonts/instrument-serif-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:italic;src:url(/assets/fonts/instrument-serif-latin-400-italic.woff2) format('woff2')}
+:root{--ink:#F3F5FA;--muted:#AEB8CB;--blue:#3B82F6;--line:rgba(140,170,230,.28);--err:#F08A7E}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:'Space Grotesk',system-ui,sans-serif;color:var(--ink);background:#060A14 url(/assets/milkyway_bg.jpg) center/cover no-repeat;
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,420px);align-items:center;gap:40px;padding:0 clamp(20px,6vw,90px)}
+.brand{position:fixed;top:18px;left:clamp(20px,6vw,90px);display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.12em}
+.lang{position:fixed;top:16px;right:clamp(20px,6vw,90px);display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.lang button{background:transparent;color:var(--muted);border:0;padding:5px 11px;font:500 13px 'Space Grotesk';cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:#0B1020}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(44px,5.4vw,84px);line-height:1.02;margin:0 0 18px}
+h1 em{color:#9CC3FF}
+.kick{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#E9A23B;font-weight:600;margin-bottom:16px}
+.lead{color:var(--muted);font-size:17px;max-width:42ch;margin:0}
+form{background:rgba(12,19,38,.55);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
+  border:1px solid var(--line);border-radius:14px;padding:26px 24px;display:grid;gap:14px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+form h2{margin:0;font-size:20px;font-weight:600}
+label{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+input{font:400 15px 'Space Grotesk';color:var(--ink);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+input:focus{outline:2px solid var(--blue);outline-offset:1px}
+button.go{font:600 15px 'Space Grotesk';color:#fff;background:var(--blue);border:0;border-radius:10px;padding:11px;cursor:pointer}
+button.go:disabled{opacity:.6;cursor:wait}
+.err{color:var(--err);font-size:13.5px;min-height:1.2em;margin:0}
+.fine{color:var(--muted);font-size:12px;margin:0}
+@media (max-width:820px){body{grid-template-columns:1fr;align-content:center;padding-top:70px}.intro{display:none}}
+</style>
+</head>
+<body>
+<div class="brand"><svg width="26" height="26" viewBox="0 0 80 80" aria-hidden="true"><rect x="18" y="8" width="9" height="64" rx="2" fill="#F3F5FA"/><path d="M27 42 L58 10" stroke="#F3F5FA" stroke-width="9" stroke-linecap="round"/><path d="M37 33 L62 70" stroke="#F3F5FA" stroke-width="9" stroke-linecap="round"/><ellipse cx="40" cy="40" rx="36" ry="11" fill="none" stroke="#E9A23B" stroke-width="3.2" transform="rotate(-20 40 40)"/><circle cx="74" cy="28" r="5" fill="#E9A23B"/></svg>KAIO</div>
+<div class="lang" role="group" aria-label="Language"><button type="button" data-l="en">EN</button><button type="button" data-l="fr">FR</button></div>
+
+<div class="intro">
+  <div class="kick" data-t="kick">Ground segment · mission control</div>
+  <h1 data-t="h1">Operators only.<br><em>Every command is signed.</em></h1>
+  <p class="lead" data-t="lead">Sign in to follow Φsat-2 and the E-LOTUS engine. Operators can also send authenticated telecommands to the satellite.</p>
+</div>
+
+<form id="f" autocomplete="on" novalidate>
+  <h2 data-t="title">Sign in</h2>
+  <label><span data-t="user">Username</span><input id="u" name="username" autocomplete="username" required maxlength="64"></label>
+  <label><span data-t="pass">Password</span><input id="p" name="password" type="password" autocomplete="current-password" required maxlength="256"></label>
+  <p class="err" id="err" role="alert"></p>
+  <button class="go" id="go" type="submit" data-t="go">Sign in</button>
+  <p class="fine" data-t="fine">Session cookies are httpOnly and expire automatically. Five wrong passwords lock the account for 15 minutes.</p>
+</form>
+
+<script>
+const T = {
+  en:{kick:'Ground segment · mission control', h1:'Operators only.<br><em>Every command is signed.</em>',
+      lead:'Sign in to follow Φsat-2 and the E-LOTUS engine. Operators can also send authenticated telecommands to the satellite.',
+      title:'Sign in', user:'Username', pass:'Password', go:'Sign in',
+      fine:'Session cookies are httpOnly and expire automatically. Five wrong passwords lock the account for 15 minutes.',
+      bad:'Wrong username or password.', many:'Too many failed attempts. Try again in 15 minutes.', net:'Server not reachable.', empty:'Enter your username and password.'},
+  fr:{kick:'Segment sol · centre de contrôle', h1:'Réservé aux opérateurs.<br><em>Chaque commande est signée.</em>',
+      lead:'Connectez-vous pour suivre Φsat-2 et le moteur E-LOTUS. Les opérateurs peuvent aussi envoyer des télécommandes authentifiées au satellite.',
+      title:'Connexion', user:'Identifiant', pass:'Mot de passe', go:'Se connecter',
+      fine:'Les cookies de session sont httpOnly et expirent automatiquement. Cinq mauvais mots de passe bloquent le compte 15 minutes.',
+      bad:'Identifiant ou mot de passe incorrect.', many:'Trop de tentatives. Réessayez dans 15 minutes.', net:'Serveur injoignable.', empty:'Saisissez votre identifiant et votre mot de passe.'}
+};
+let L = 'en'; try { L = localStorage.getItem('kaio-lang') === 'fr' ? 'fr' : 'en'; } catch(e){}
+function setL(l){ L = l; try { localStorage.setItem('kaio-lang', l); } catch(e){} document.documentElement.lang = l;
+  document.querySelectorAll('[data-t]').forEach(e=>{ e.innerHTML = T[l][e.dataset.t]; });
+  document.querySelectorAll('[data-l]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.l === l))); }
+document.querySelectorAll('[data-l]').forEach(b=>b.addEventListener('click', ()=>setL(b.dataset.l)));
+setL(L);
+
+const H = {'Content-Type':'application/json','X-KAIO':'1'};
+// still have a valid refresh cookie? go straight in
+fetch('/api/auth/refresh', {method:'POST', headers:H, credentials:'same-origin'}).then(r=>{ if(r.ok) location.replace('/'); }).catch(()=>{});
+
+const f = document.getElementById('f'), err = document.getElementById('err'), go = document.getElementById('go');
+f.addEventListener('submit', async e=>{
+  e.preventDefault(); err.textContent = '';
+  const username = document.getElementById('u').value.trim(), password = document.getElementById('p').value;
+  if(!username || !password){ err.textContent = T[L].empty; return; }
+  go.disabled = true;
+  try {
+    const r = await fetch('/api/auth/login', {method:'POST', headers:H, credentials:'same-origin', body:JSON.stringify({username, password})});
+    if(r.ok){ location.replace('/'); return; }
+    err.textContent = r.status === 429 ? T[L].many : T[L].bad;
+  } catch(x){ err.textContent = T[L].net; }
+  go.disabled = false; document.getElementById('p').value = '';
+});
+</script>
+</body>
+</html>
